@@ -55,7 +55,7 @@ class (Eq string, Show string, IsString string)
 	(~?>) :: string -> parser string' a -> result a
 
 instance Source Atto.Parser B.ByteString B.ByteString AB.Result where
-	t ~> p = AB.eitherResult $ t ~?> p
+	t ~> p = AB.parseOnly p t
 
 	t ~?> p = AB.parse p t
 
@@ -65,7 +65,7 @@ instance Source Atto.Parser LB.ByteString B.ByteString ALB.Result where
 	t ~?> p = ALB.parse p t
 
 instance Source Atto.Parser T.Text T.Text AT.Result where
-	t ~> p = AT.eitherResult $ t ~?> p
+	t ~> p = AT.parseOnly p t
 
 	t ~?> p = AT.parse p t
 
@@ -74,7 +74,11 @@ instance Source Atto.Parser LT.Text T.Text ALT.Result where
 
 	t ~?> p = ALT.parse p t
 
+-- | Class for generically inspecting unconsumed input
 class Leftover r s | r -> s where
+	-- | Get the unconsumed input from the result of a parser
+	--   
+	--   Returns 'Nothing' if the unconsumed input is ""
 	leftover :: r a -> Maybe s
 
 instance Leftover AB.Result B.ByteString where

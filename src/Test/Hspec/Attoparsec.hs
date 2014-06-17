@@ -8,12 +8,7 @@
 -- 
 -- Utility functions for testing @attoparsec@ parsers
 -- 
--- You can use `(~>)` on different input types
--- 
--- * Strict 'Data.ByteString.ByteString'
--- * Lazy 'Data.ByteString.Lazy.ByteString'
--- * Strict 'Data.Text.Text'
--- * Lazy 'Data.Text.Lazy.Text'
+--
 --
 module Test.Hspec.Attoparsec
   ( -- * Equality-based combinator
@@ -42,7 +37,7 @@ import Test.Hspec.Attoparsec.Source
 import Test.Hspec.Expectations
 
 -- | Create an expectation by saying what the result should be.
---   Intended to be used with @(~>)@ as follows:
+--   Intended to be used with '~>' as follows:
 --
 -- >   "<!-- foo -->" ~> htmlCommentParser
 -- >     `shouldParse` TagComment " foo "
@@ -104,7 +99,11 @@ parser `shouldSucceedOn` string =
   (string ~> parser) `shouldSatisfy` isRight
 
 -- | Checking that the given parser succeeds
---   and yields the given part of the input unconsumed
+--   and yields the given part of the input unconsumed.
+--   Intended to be used in conjunction with '~?>'
+--
+-- > ("xa" :: Text) ~?> char 'x'
+-- >   `leavesUnconsumed` "a"
 leavesUnconsumed :: (Source p s s' r, Leftover r s)
                  => r a
                  -> s
