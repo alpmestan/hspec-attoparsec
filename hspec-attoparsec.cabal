@@ -1,0 +1,46 @@
+name:                hspec-attoparsec
+version:             0.1.0.0
+synopsis:            Utility functions for testing your attoparsec parsers with hspec
+description:         This package provides some helper functions for testing attoparsec parsers with hspec.
+                     .
+                     See the documentation in @Test.Hspec.Attoparsec@.
+homepage:            http://github.com/alpmestan/hspec-attoparsec
+license:             BSD3
+license-file:        LICENSE
+author:              Alp Mestanogullari
+maintainer:          alpmestan@gmail.com
+copyright:           2014 Alp Mestanogullari
+category:            Testing, Parsing
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Test.Hspec.Attoparsec,
+                       Test.Hspec.Attoparsec.Source
+  build-depends:       base >=4 && <5,
+                       attoparsec >= 0.10,
+                       hspec-expectations >= 0.5,
+                       bytestring >= 0.8,
+                       text >= 1.0
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  ghc-options:         -O -Wall
+
+test-suite spec
+  type:
+      exitcode-stdio-1.0
+  ghc-options:
+      -Wall -O -fno-warn-unused-do-bind
+  hs-source-dirs:
+      src, tests
+  main-is:
+      Spec.hs
+  build-depends:
+      base    == 4.*
+    , text >= 1.0
+    , bytestring >= 0.8
+    , hspec
+    , hspec-expectations >= 0.5
+    , attoparsec >= 0.10
+  default-language:
+      Haskell2010
