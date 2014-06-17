@@ -1,0 +1,15 @@
+language: haskell
+
+script:
+  - cabal configure --enable-tests && cabal build && cabal test
+
+before_install:
+  - cabal update
+
+install:
+  - cabal install --only-dependencies --enable-tests
+  
+notifications:
+  email:
+      - alpmestan@gmail.com
+  irc: "irc.freenode.org#haskell-math"
