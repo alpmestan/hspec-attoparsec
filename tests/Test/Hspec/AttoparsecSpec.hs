@@ -13,13 +13,24 @@ spec :: Spec
 spec = do
   describe "shouldParse" $
     it "works on: \"x\" ~> char 'x'" $
-      ("x" :: Text) ~> parseX
+      ("x" :: Text) ~> char 'x'
         `shouldParse` 'x'
+
+  describe "parseSatisfies" $
+    it "works on: \"x\" and (=='x')" $
+      ("x" :: Text) ~> char 'x'
+        `parseSatisfies` (=='x')
+
+  describe "shouldFailOn" $
+    it "char 'x' fails on \"ha\"" $
+      char 'x' `shouldFailOn` ("ha" :: Text)
+
+  describe "shouldSucceedOn" $
+    it "char 'x' succeeds on \"x\"" $
+      char 'x' `shouldSucceedOn` ("x" :: Text)
 
   describe "leavesUnconsumed" $
     it "works on \"xa\" ~?> char 'x'" $
-      ("xa" :: Text) ~?> parseX
-        `leavesUnconsumed` ("a" :: Text)
+      ("xa" :: Text) ~?> char 'x'
+        `leavesUnconsumed` "a"
 
-parseX :: Parser Char
-parseX = char 'x'

@@ -78,7 +78,7 @@ parseSatisfies res predicate =
                   ++ "\n  but parsing failed with error: " ++ err
 
         checkPred value =
-          when (predicate value) $
+          when (not $ predicate value) $
             expectationFailure $   
                  "  the following value did not match the predicate: \n"
               ++ "  " ++ show value
@@ -86,8 +86,8 @@ parseSatisfies res predicate =
 -- | Check that a parser fails on some given input
 --
 -- > char 'x' `shouldFailOn` "a"
-shouldFailOn :: (Source p s r, Show a)
-             => p a
+shouldFailOn :: (Source p s s' r, Show a)
+             => p s' a
              -> s
              -> Expectation
 parser `shouldFailOn` string =
@@ -96,8 +96,8 @@ parser `shouldFailOn` string =
 -- | Check that a parser succeeds on some given input
 --
 -- > char 'x' `shouldSucceedOn` "x"
-shouldSucceedOn :: (Source p s r, Show a)
-                => p a
+shouldSucceedOn :: (Source p s s' r, Show a)
+                => p s' a
                 -> s
                 -> Expectation
 parser `shouldSucceedOn` string =
@@ -105,7 +105,7 @@ parser `shouldSucceedOn` string =
 
 -- | Checking that the given parser succeeds
 --   and yields the given part of the input unconsumed
-leavesUnconsumed :: (Source p s r, Leftover r s)
+leavesUnconsumed :: (Source p s s' r, Leftover r s)
                  => r a
                  -> s
                  -> Expectation

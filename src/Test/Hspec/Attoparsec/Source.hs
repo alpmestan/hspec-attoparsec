@@ -35,14 +35,14 @@ import Data.String (IsString)
 --   type associated to the parser for the given
 --   input type.
 class (Eq string, Show string, IsString string)
-   => Source parser string result | string -> parser, string -> result where
+   => Source parser string string' result | string -> parser, string -> result, string -> string' where
 	-- | Feed some input to a parser and extract the result
 	--   as either a failure 'String' or an actually parsed value.
 	--   Can be read as /fed to/.
 	-- 
 	-- > -- "<a ...>" fed to an HTML parser 
 	-- > "<a href=\"/foo\">Go to foo</a>" ~> htmlParser :: Either String a
-	(~>) :: string -> parser a -> Either String a
+	(~>) :: string -> parser string' a -> Either String a
 
 	-- | Feed some input to a parser and extract it as the
 	--   appropriate result type from that module.
@@ -52,29 +52,29 @@ class (Eq string, Show string, IsString string)
 	--   with one concrete set of parser, input and result types.
 	--   This lets us inspect the result in any way we want, e.g
 	--   in conjunction with @shouldSatisfy@ or a custom hspec combinator.
-	(~?>) :: string -> parser a -> result a
+	(~?>) :: string -> parser string' a -> result a
 
-instance Source AB.Parser B.ByteString AB.Result where
+instance Source Atto.Parser B.ByteString B.ByteString AB.Result where
 	t ~> p = AB.eitherResult $ t ~?> p
 
 	t ~?> p = AB.parse p t
 
-instance Source ALB.Parser LB.ByteString ALB.Result where
+instance Source Atto.Parser LB.ByteString B.ByteString ALB.Result where
 	t ~> p = ALB.eitherResult $ t ~?> p
 
 	t ~?> p = ALB.parse p t
 
-instance Source AT.Parser T.Text AT.Result where
+instance Source Atto.Parser T.Text T.Text AT.Result where
 	t ~> p = AT.eitherResult $ t ~?> p
 
 	t ~?> p = AT.parse p t
 
-instance Source ALT.Parser LT.Text ALT.Result where
+instance Source Atto.Parser LT.Text T.Text ALT.Result where
 	t ~> p = ALT.eitherResult $ t ~?> p
 
 	t ~?> p = ALT.parse p t
 
-class Leftover r s where
+class Leftover r s | r -> s where
 	leftover :: r a -> Maybe s
 
 instance Leftover AB.Result B.ByteString where
