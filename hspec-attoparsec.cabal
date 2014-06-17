@@ -1,5 +1,5 @@
 name:                hspec-attoparsec
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            Utility functions for testing your attoparsec parsers with hspec
 description:         This package provides some helper functions for testing attoparsec parsers with hspec.
                      .
