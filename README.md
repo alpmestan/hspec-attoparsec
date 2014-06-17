@@ -1,6 +1,8 @@
 hspec-attoparsec
 ================
 
+[![Build Status](https://secure.travis-ci.org/alpmestan/hspec-attoparsec.png?branch=master)](http://travis-ci.org/alpmestan/hspec-attoparsec)
+
 This (small) package provides handy functions for testing [attoparsec](http://hackage.haskell.org/package/attoparsec) parsers with [hspec](http://hackage.haskell.org/package/hspec).
 
 To see it in action, what better way is there than looking at hspec-attoparsec's own test suite!
