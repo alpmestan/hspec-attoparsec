@@ -46,4 +46,8 @@ spec = do
     it "works on \"xa\" ~?> char 'x'" $
       ("xa" :: Text) ~?> char 'x'
         `leavesUnconsumed` "a"
+
+    it "char 'x' leaves nothing unconsumed on \"x\"" $
+      ("x" :: Text) ~?> char 'x'
+        `leavesUnconsumed` ""
 ```

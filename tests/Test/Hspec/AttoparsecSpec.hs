@@ -34,8 +34,12 @@ spec = do
     it "char 'x' succeeds on \"x\"" $
       char 'x' `shouldSucceedOn` ("x" :: Text)
 
-  describe "leavesUnconsumed" $
+  describe "leavesUnconsumed" $ do
     it "works on \"xa\" ~?> char 'x'" $
       ("xa" :: Text) ~?> char 'x'
         `leavesUnconsumed` "a"
+
+    it "char 'x' leaves nothing unconsumed on \"x\"" $
+      ("x" :: Text) ~?> char 'x'
+        `leavesUnconsumed` ""
 

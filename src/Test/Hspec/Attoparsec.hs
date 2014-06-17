@@ -6,10 +6,8 @@
 -- Maintainer   : alpmestan@gmail.com
 -- Stability    : experimental
 -- 
--- Utility functions for testing @attoparsec@ parsers
--- 
---
---
+-- Utility functions for testing @attoparsec@ parsers, each one providing
+-- an example of how to use it.
 module Test.Hspec.Attoparsec
   ( -- * Equality-based combinator
     shouldParse
@@ -120,10 +118,8 @@ leavesUnconsumed res str
             expectationFailure $ 
                    "  expected the parser to leave the following unconsumed: " ++ show str
               ++ "\n  but got: " ++ show str'
+        Nothing -> expectationFailure $
+                          "  expected the parser to leave the following unconsumed: " ++ show str
+                     ++ "\n  but got no unconsumed input"
 
   where unconsumed = leftover res
-
-
-
-
-
