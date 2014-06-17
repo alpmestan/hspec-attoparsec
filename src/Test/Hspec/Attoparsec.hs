@@ -30,7 +30,6 @@ module Test.Hspec.Attoparsec
   ) where
 
 import Control.Monad (when)
-import Data.Either (isLeft, isRight)
 import Test.Hspec.Attoparsec.Source
 import Test.Hspec.Expectations
 
@@ -95,6 +94,14 @@ shouldSucceedOn :: (Source p s s' r, Show a)
                 -> Expectation
 parser `shouldSucceedOn` string =
   (string ~> parser) `shouldSatisfy` isRight
+
+isLeft :: Either a b -> Bool
+isLeft (Left _) = True
+isLeft _        = False
+
+isRight :: Either a b -> Bool
+isRight (Right _) = True
+isRight _         = False
 
 -- | Checking that the given parser succeeds
 --   and yields the given part of the input unconsumed.
