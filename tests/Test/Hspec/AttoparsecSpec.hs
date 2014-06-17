@@ -22,7 +22,7 @@ spec = do
       ("x" :: Text) ~> char 'x'
         `parseSatisfies` (=='x')
 
-    it "\"xxx\" satisfies length == 3 when parser as a list of char" $
+    it "\">>>\" satisfies length == 3 when parser as a list of char" $
       (">>>" :: Text) ~> many (char '>')
         `parseSatisfies` ((==3) . Prelude.length)
 
