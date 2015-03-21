@@ -1,4 +1,5 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings,
+			 FlexibleContexts #-}
 -- |
 -- Module       : Test.Hspec.Attoparsec
 -- Copyright    : (c) 2014 Alp Mestanogullari
