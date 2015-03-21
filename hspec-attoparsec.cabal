@@ -1,5 +1,5 @@
 name:                hspec-attoparsec
-version:             0.1.0.1
+version:             0.1.0.2
 synopsis:            Utility functions for testing your attoparsec parsers with hspec
 description:         This package provides some helper functions for testing attoparsec parsers with hspec.
                      .
@@ -10,7 +10,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Alp Mestanogullari
 maintainer:          alpmestan@gmail.com
-copyright:           2014 Alp Mestanogullari
+copyright:           2014-2015 Alp Mestanogullari
 category:            Testing, Parsing
 build-type:          Simple
 cabal-version:       >=1.10
