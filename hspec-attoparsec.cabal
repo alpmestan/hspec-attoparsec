@@ -19,6 +19,7 @@ library
   exposed-modules:     Test.Hspec.Attoparsec,
                        Test.Hspec.Attoparsec.Source
   build-depends:       base >=4 && <5,
+                       base-compat >= 0.5,
                        attoparsec >= 0.10,
                        hspec-expectations >= 0.5,
                        bytestring >= 0.8,
@@ -38,6 +39,7 @@ test-suite spec
       Spec.hs
   build-depends:
       base    == 4.*
+    , base-compat
     , text >= 1.0
     , bytestring >= 0.8
     , hspec
